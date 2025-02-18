@@ -1,9 +1,4 @@
-# Project Large Language Models (LLMs), Agents and Langchain
+# Project Deep learning
 
-In this project, langchain was used in different LLMs, such as GPT2 through Huggingface and GPT3.5 using the OpenAI API, to extract information from a text database in different ways like:
-
-* Using different prompts techniques.
-* Through the use of agents.
-* Making inference using the OpenAi embeddings  and ChromaDB to manage these embeddings.
-* Using the Huggingface pre-trained model without changing it and performing fine tuning.
+In this project, low-resolution image classification was performed using our own models based on convolutional neural networks and also using pre-trained models. These pre-trained models were used in their base form, modified by transfer learning and also by fine tuning, and the performance was compared using all these models.
 
