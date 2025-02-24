@@ -4,6 +4,25 @@ Este proyecto implementa un sistema de recomendación usando FastAPI para el des
 
 ---
 ## Explicación del dataset y procesamiento de datos
+El dataset se compone de 3 archivos de texto plano en formato CSV con la información de los usuarios, los productos, y las interacciones entre los usuarios con los productos.
+
+El dataset de usuarios (users.csv) contiene los siguientes campos:
+**user_id:** Identificador único del usuario.                           **edad:** Edad del usuario                                        **genero:** Género del usuario.	
+**nivel_ingresos:** Nivel de ingresos.                                  **nivel_educativo:** Nivel educativo.                             **intereses:** Lista de intereses separados por comas.
+**tipo_suscripcion:** Tipo de suscripción.                              **categoria_cliente:** Categoría del cliente.                     **ubicacion:** Ubicación del usuario.
+**dispositivo:** Dispositivo principal de acceso.                       **frecuencia_login:** Frecuencia con la que el usuario inicia sesión.
+
+
+El dataset de productos (products.csv) contiene los siguientes campos:
+**product_id:** Identificador único del producto o servicio.   	        **name:** Nombre del producto o servicio.                         **category:** Categoría del producto.	
+**descripcion:** Descripción del producto o servicio.          	        **palabras_clave:** Palabras clave relacionadas con el producto. 	**precio:** Precio del producto o servicio en dólares.	
+**rating_promedio:** Puntuación promedio del producto.                  **descuento_aplicado:** Descuento aplicado en porcentaje.         **stock_actual:** Número de unidades disponibles en stock.
+
+
+El dataset de interacciones (interactions.csv) contiene los siguientes campos:
+**user_id:** Identificador del usuario que interactuó con un producto.  **metodo_pago:** Método de pago utilizado.                        **tipo_interaccion:** Tipo de interacción.	
+**rating:** Puntuación otorgada al producto.                   	        **comentario:** Opinión del usuario sobre el producto.            **timestamp:** Fecha y hora de la interacción.	
+**product_id:** Identificador del producto con el que el usuario interactuó. 
 
 
 ---
@@ -58,13 +77,11 @@ git config core.sparseCheckout true
 git sparse-checkout set Project_Recommendation_system
 git pull origin main
 ```
+O también podemos descargar el repositorio en un comprimido ZIP y quedarnos con la carpeta Project_Recommendation_system
 
 ### 2. Ejecución servicio de API en contenedor de Docker
-Luego entramos a la carpeta que clonamos en el paso anterior, es decir a Project_Recommendation_system/. Si estamos en terminal bash usamos
-```
-cd Project_Recommendation_system
-```
-Se inicia el servicio que nos va a permitir usar la API. Es necesario tener docker para poder ejecutar el siguiente comando
+Entramos a la carpeta que clonamos o descargamos en el paso anterior, es decir a Project_Recommendation_system.
+Iniciamos el servicio que nos va a permitir usar la API, lo cual es necesario tener docker para poder ejecutar el siguiente comando
 ```
 sudo docker compose up api_service
 ```
