@@ -82,3 +82,6 @@ donde 123 lo reemplazaríamos con el user_id del usuario con el que deseamos hac
 ## Ejemplos de ejecuciones de la API
 ![pruebas](./pruebas_API.png)
 
+---
+## Análisis sobre el rendimiento del modelo y posibles mejoras
+
