@@ -74,5 +74,5 @@ o Explicación clara de como el desarrollo esta distribuido en el
 repositorio y como ejecutarlo.
 
 
-![pruebas](Pruebas a la API.png)
+![pruebas](./Pruebas a la API.png)
 
