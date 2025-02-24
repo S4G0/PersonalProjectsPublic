@@ -1,16 +1,16 @@
 =======
 # Sistema de recomendación - prueba técnica
-
 Este proyecto implementa un sistema de recomendación usando FastAPI para el despliegue y Docker para contenerizar la aplicación. Se utilizó UV para hacer la gestión de dependencias.
 
+---
 ## Explicación del dataset y procesamiento de datos.
 
 
-
+---
 ## La metodología utilizada para generar recomendaciones.
 
 
-
+---
 ## Estructura del Proyecto
 ```
 Project_Recommendation_system/
@@ -33,9 +33,9 @@ Project_Recommendation_system/
 │──── interactions_tr.csv                  # Datos de interacciones transformado creado por el notebook EDA_y_transformacion_de_datos.ipynb de la carpeta ML/
 │──── products_tr.csv                      # Datos de productos transformado creado por el notebook EDA_y_transformacion_de_datos.ipynb de la carpeta ML/
 │──── users_tr.csv                         # Datos de usuarios transformado creado por el notebook EDA_y_transformacion_de_datos.ipynb de la carpeta ML/
-
 ```
 
+---
 ## Este proyecto fue desarrollado utilizando las siguientes tecnologías y librerías
 
 - Python 3.9: Lenguaje de progrmación escogido para hacer el procesamiento de datos, desarrollar el modelo y desplegar con FastAPI
@@ -78,7 +78,7 @@ curl -X GET "http://localhost:5000/recommendations?user_id=123"
 o en nuestro navegador meternos al url ```http://localhost:5000/recommendations?user_id=123```
 donde 123 lo reemplazaríamos con el user_id del usuario con el que deseamos hacer la recomendación de contenido.
 
-
+---
 ## Ejemplos de ejecuciones de la API
 ![pruebas](./pruebas_API.png)
 
