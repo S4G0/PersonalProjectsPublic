@@ -1,79 +1,84 @@
 =======
 # Sistema de recomendación - prueba técnica
 
-Este proyecto implementa un modelo de predicción de la masa corporal de pingüinos usando FastAPI para la API y Docker para contenerizar la aplicación. Se utilizó UV para hacer la gestión de dependencias. Y mediante Se incluyen las etapas de preprocesamiento, entrenamiento y delo.
+Este proyecto implementa un sistema de recomendación usando FastAPI para el despliegue y Docker para contenerizar la aplicación. Se utilizó UV para hacer la gestión de dependencias.
+
+## Explicación del dataset y procesamiento de datos.
+
+
+
+## La metodología utilizada para generar recomendaciones.
+
+
 
 ## Estructura del Proyecto
+```
+Project_Recommendation_system/
+│── docker-compose.yaml                    # Archivo de docker compose
+│── README.md                              # Documentación del proyecto
+│── pruebas_API.png                        # Imagen con pruebas de funcionamiento de la API
+│── API/                                   # Carpeta con los archivos del servicio de API
+│──── api.py                               # Implementación de la API con FastAPI
+│──── requirements.txt                     # Dependencias necesarias para la API
+│──── Dockerfile                           # Dockerfile para contenerizar la API
+│──── modelo.py                            # Archivo de python con el modelo de recomendación
+│── ML/                                    # Carpeta con los archivos del servicio de transformación de datos
+│──── EDA_y_transformacion_de_datos.ipynb  # Notebook de preprocesamiento de datos que generan los archivos de la carpeta data/
+│──── requirements.txt                     # Dependencias necesarias para la transformación de datos
+│──── Dockerfile                           # Dockerfile para contenerizar el modelo de ML
+│──── interactions.csv                     # Data inicial de interacciones
+│──── products.csv                         # Data inicial de productos
+│──── users.csv                            # Data inicial de usuarios
+│── data/                                  # Carpeta de volumen de datos NO volátiles
+│──── interactions_tr.csv                  # Datos de interacciones transformado creado por el notebook EDA_y_transformacion_de_datos.ipynb de la carpeta ML/
+│──── products_tr.csv                      # Datos de productos transformado creado por el notebook EDA_y_transformacion_de_datos.ipynb de la carpeta ML/
+│──── users_tr.csv                         # Datos de usuarios transformado creado por el notebook EDA_y_transformacion_de_datos.ipynb de la carpeta ML/
 
 ```
-Entrega2/
-│── docker-compose.yaml        # Archivo de docker compose
-│── README.md                  # Documentación del proyecto
-│── API/                       # Carpeta con los archivos del servicio de API
-│──── api.py                   # Implementación de la API con FastAPI
-│──── requirements.txt         # Dependencias necesarias para la API
-│──── Dockerfile               # Dockerfile para contenerizar la API
-│── ML/                        # Carpeta con los archivos del servicio de ML
-│──── preprocesamiento.ipynb   # Notebook de preprocesamiento de datos que generan los archivos de entrenamiento y prueba
-│──── entrenar_modelos.ipynb   # Notebook de entrenamiento de modelos que generan los archivos .pkl de Random Forest y Gradient Boostng
-│──── requirements.txt         # Dependencias necesarias para el modelo de ML
-│──── Dockerfile               # Dockerfile para contenerizar el modelo de ML
-│──── penguins_iter.csv        # Data inicial
-│── data/                      # Volumen de datos NO volátiles
-│──── X_train.csv & y_train.csv      # Datos de entrenamiento que son generados por el notebook preprocesamiento.ipynb
-│──── X_test.csv & y_test.csv        # Datos de prueba que son generados por el notebook preprocesamiento.ipynb
-|──── modelo_random_forest.pkl       # Modelo Random Forest entrenado después del preprocesamiento que es generado por el notebook entrenar_modelos.ipynb.
-│──── modelo_gradient_boosting.pkl   # Modelo Gradient Boosting entrenado después del preprocesamiento que es generado por el notebook entrenar_modelos.ipynb.
 
-```
-# Tecnologías Utilizadas
+## Este proyecto fue desarrollado utilizando las siguientes tecnologías y librerías
 
-- Python 3.9
-- FastAPI
-- Scikit-Learn
-- Joblib
-- Pandas & NumPy
-- Docker
-- Jupyter y Jupyter notebook
-- UV
+- Python 3.9: Lenguaje de progrmación escogido para hacer el procesamiento de datos, desarrollar el modelo y desplegar con FastAPI
+- FastAPI: Tecnología escogida para realizar el despliegue
+- Scikit-Learn y NumPy: Librerías de Python que fueron necesarias para realizar ciertos cálculos (Cosine_similarity por ejemplo) o manipulaciones de datos
+- Pandas: Librería de Python central para realizar la manipulación de las bases de datos mediante dataframes.
+- Docker: APlicación para crear contenedores y así tener entornos totalmente controlados para poder desplegar servicios
+- Jupyter y Jupyter notebook: Mediante los notebook de Python se da mejor visibilidad a ciertos cálculos o partes del código
+- UV: Gestor de dependencias
 
 ---
-# Instrucciones
+## Instrucciones para poder usar la API
 
-## 1. Clonar el Repositorio
-Se clona la carpeta del sistema de recomendación a través de los siguientes comandos
+### 1. Clonar el Repositorio
+Si tenemos GIT, a través de GIT bash podemos clonar la carpeta del sistema de recomendación mediante los siguientes comandos
 ```
 git init
 git remote add origin https://github.com/S4G0/PersonalProjectsPublic.git
 git config core.sparseCheckout true
-git sparse checkout set "Project Recommendation system"
+git sparse-checkout set Project_Recommendation_system
+git pull origin main
 ```
-## 2. Ejecución servicio de Machine learning
-Se inicia el servicio que nos va permitir preprocesar y entrenar los modelos
-```
-sudo docker compose up --build ml_service
-```
-Este servicio va abrir un Jupyter Notebook en el puerto 8888 donde vamos a poder ejecutar los notebooks.
-Primero ejecutaríamos el notebook preprocesamiento.ipynb para generar los archivos en entrenamiento y test en la carpeta data/.
-Y luego ejecutamos el notebook entrenar_modelos.ipynb para generar los archivos .pkl en la carpeta data/ que serán finalmente usados por la api.
 
-## 3. Ejecución servicio de API
-Se inicia el servicio que nos va a permitir usar la API
+### 2. Ejecución servicio de API en contenedor de Docker
+Luego entramos a la carpeta que clonamos en el paso anterior, es decir a Project_Recommendation_system/. Si estamos en terminal bash usamos
 ```
-sudo docker compose up --build ml_service
+cd Project_Recommendation_system
 ```
-Este servicio va a desplegar la API en el puerto 8989 donde vamos a poder hacer la inferencia con los modelos entrenados del paso anterior.
-Esta API reconoce los archivos .pkl que fueron entrenados anteriormente. Si se hubiesen entrenados más modelos la API está en la capacidad de reconocerlos.
-Esta API es necesario escoger el modelo a usar y pasarle los parámetros "Culmen_Length_mm", "Culmen_Depth_mm", "Flipper_Length_mm" para poder realizar la inferencia.
+Se inicia el servicio que nos va a permitir usar la API. Es necesario tener docker para poder ejecutar el siguiente comando
+```
+sudo docker compose up api_service
+```
+Este servicio va a desplegar la API en el puerto 5000 de nuestro local_host.
 
-
-o La metodología utilizada para generar recomendaciones.
-o Explicación del dataset y procesamiento de datos.
-o Tecnologías elegidas y arquitectura del sistema.
-o Cómo ejecutar la API para probar las recomendaciones.
-o Explicación clara de como el desarrollo esta distribuido en el
-repositorio y como ejecutarlo.
+### 3. Uso de la API
+Teniendo el servicio en ejecución podemos en la terminal ejecutar 
+```
+curl -X GET "http://localhost:5000/recommendations?user_id=123"
+```
+o en nuestro navegador meternos al url ```http://localhost:5000/recommendations?user_id=123```
+donde 123 lo reemplazaríamos con el user_id del usuario con el que deseamos hacer la recomendación de contenido.
 
 
+## Ejemplos de ejecuciones de la API
 ![pruebas](./pruebas_API.png)
 
