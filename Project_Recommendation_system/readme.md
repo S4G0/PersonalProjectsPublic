@@ -3,11 +3,11 @@
 Este proyecto implementa un sistema de recomendación usando FastAPI para el despliegue y Docker para contenerizar la aplicación. Se utilizó UV para hacer la gestión de dependencias.
 
 ---
-## Explicación del dataset y procesamiento de datos.
+## Explicación del dataset y procesamiento de datos
 
 
 ---
-## La metodología utilizada para generar recomendaciones.
+## Metodología utilizada para generar recomendaciones
 
 
 ---
