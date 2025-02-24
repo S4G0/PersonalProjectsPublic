@@ -41,11 +41,12 @@ Entrega2/
 # Instrucciones
 
 ## 1. Clonar el Repositorio
-Se clona el repositorio
+Se clona la carpeta del sistema de recomendación a través de los siguientes comandos
 ```
-git clone https://github.com/felaponte/MLOps2.git
-cd MLOps2
-cd Entrega2
+git init
+git remote add origin https://github.com/S4G0/PersonalProjectsPublic.git
+git config core.sparseCheckout true
+git sparse checkout set "Project Recommendation system"
 ```
 ## 2. Ejecución servicio de Machine learning
 Se inicia el servicio que nos va permitir preprocesar y entrenar los modelos
