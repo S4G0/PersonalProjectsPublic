@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-
 =======
-### Taller 2 - MLOps PUJ
+# Sistema de recomendación - prueba técnica
 
 Este proyecto implementa un modelo de predicción de la masa corporal de pingüinos usando FastAPI para la API y Docker para contenerizar la aplicación. Se utilizó UV para hacer la gestión de dependencias. Y mediante Se incluyen las etapas de preprocesamiento, entrenamiento y delo.
 
@@ -68,4 +66,10 @@ Esta API reconoce los archivos .pkl que fueron entrenados anteriormente. Si se h
 Esta API es necesario escoger el modelo a usar y pasarle los parámetros "Culmen_Length_mm", "Culmen_Depth_mm", "Flipper_Length_mm" para poder realizar la inferencia.
 
 
+o La metodología utilizada para generar recomendaciones.
+o Explicación del dataset y procesamiento de datos.
+o Tecnologías elegidas y arquitectura del sistema.
+o Cómo ejecutar la API para probar las recomendaciones.
+o Explicación clara de como el desarrollo esta distribuido en el
+repositorio y como ejecutarlo.
 
