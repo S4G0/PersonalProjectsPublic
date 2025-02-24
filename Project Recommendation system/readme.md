@@ -73,3 +73,6 @@ o Cómo ejecutar la API para probar las recomendaciones.
 o Explicación clara de como el desarrollo esta distribuido en el
 repositorio y como ejecutarlo.
 
+
+![pruebas](Pruebas a la API.png)
+
