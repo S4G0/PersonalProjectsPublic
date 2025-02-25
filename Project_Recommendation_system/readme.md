@@ -13,6 +13,8 @@ El dataset de usuarios (users.csv) contiene los siguientes campos:
 **tipo_suscripcion:** Tipo de suscripción.                              **categoria_cliente:** Categoría del cliente.                     **ubicacion:** Ubicación del usuario.
 **dispositivo:** Dispositivo principal de acceso.                       **frecuencia_login:** Frecuencia con la que el usuario inicia sesión.
 ```
+En el modelo solo se usaron los campos de usuario "user_id", "edad",	"genero" e "intereses", ya que se consideró que "nivel de ingresos", "nivel_educativo", "tipo_suscripcion", "categoría_clientes", "ubicacion", "dispositivo" y "frecuencia login" eran variables que no nos aportaban mucha información sobre las preferencias de los clientes. Y a la variable edad se le hizo una transformación a una variable categórica agrupándo la edad en bines de 12, es decir se agruparon las edades de [18 a 29], [30,41], [42,53], [54,65], [66,77] y [78,89]. Se usó un agrupado uniforme ya que la variable de edad estaba unifórmemente distribuida.
+
 
 El dataset de productos (products.csv) contiene los siguientes campos:
 ```
@@ -20,6 +22,8 @@ El dataset de productos (products.csv) contiene los siguientes campos:
 **descripcion:** Descripción del producto o servicio.          	        **palabras_clave:** Palabras clave relacionadas con el producto. 	**precio:** Precio del producto o servicio en dólares.	
 **rating_promedio:** Puntuación promedio del producto.                  **descuento_aplicado:** Descuento aplicado en porcentaje.         **stock_actual:** Número de unidades disponibles en stock.
 ```
+En el modelo solo se usaron los campos de productos "product_id", "name", "category", "descripcion" y "palabras_clave", ya que se consideró que "precio", "descuento_aplicado" y "stock_actual" eran variables que no describían intrinsicamente las características del producto o servicio. A la variable "palabras_clave" se le realizó una pequeña transformación donde se organizaron las distintas palabras clave de forma alfabética, es decir si tenemos las palabras clave "Rendimiento, Deporte, Fitness" se transforma a "Deporte, Fitness, Rendimiento". Después de esa transformación se evidenció que había una gran cantidad de productos y servicios duplicados, hay en realidad solo 15 servicios/productos diferentes. Por lo que se creó un campo llamado "index" para identificar estos servicios/productos de forma única.
+
 
 El dataset de interacciones (interactions.csv) contiene los siguientes campos:
 ```
@@ -27,6 +31,8 @@ El dataset de interacciones (interactions.csv) contiene los siguientes campos:
 **rating:** Puntuación otorgada al producto.                   	        **comentario:** Opinión del usuario sobre el producto.            **timestamp:** Fecha y hora de la interacción.	
 **product_id:** Identificador del producto con el que el usuario interactuó. 
 ```
+En el modelo solo se usaron los campos de interacciones "user_id",	"product_id",	"tipo_interaccion", "rating" y "comentario", ya que se consideró que "método_pago" no era una variable relevante para el modelo de recomendación y "timestamp" tampoco fue relevante ya que todas las interacciones se encuentran en un periodo corto de tiempo entre 2023-01-01 y	2023-02-04.
+
 
 ---
 ## Metodología utilizada para generar recomendaciones
@@ -43,9 +49,9 @@ Project_Recommendation_system/
 │──── api.py                               # Implementación de la API con FastAPI
 │──── requirements.txt                     # Dependencias necesarias para la API
 │──── Dockerfile                           # Dockerfile para contenerizar la API
-│──── modelo.py                            # Archivo de python con el modelo de recomendación
+│──── modelo.py                            # Archivo de python con el **MODELO DE RECOMENDACIÓN**
 │── ML/                                    # Carpeta con los archivos del servicio de transformación de datos
-│──── EDA_y_transformacion_de_datos.ipynb  # Notebook de preprocesamiento de datos que generan los archivos de la carpeta data/
+│──── EDA_y_transformacion_de_datos.ipynb  # Notebook de **PRE-PROCESAMIENTO DE DATOS** que genera los archivos de la carpeta data/
 │──── requirements.txt                     # Dependencias necesarias para la transformación de datos
 │──── Dockerfile                           # Dockerfile para contenerizar el modelo de ML
 │──── interactions.csv                     # Data inicial de interacciones
@@ -104,4 +110,5 @@ donde 123 lo reemplazaríamos con el user_id del usuario con el que deseamos hac
 
 ---
 ## Análisis sobre el rendimiento del modelo y posibles mejoras
+
 
