@@ -2,6 +2,7 @@
 # Sistema de recomendación - prueba técnica
 Este proyecto implementa un sistema de recomendación usando FastAPI para el despliegue y Docker para contenerizar la aplicación. Se utilizó UV para hacer la gestión de dependencias.
 
+
 ---
 ## Explicación del dataset y procesamiento de datos
 El dataset se compone de 3 archivos de texto plano en formato CSV con la información de los usuarios, los productos, y las interacciones entre los usuarios con los productos.
@@ -15,7 +16,6 @@ dispositivo: Dispositivo principal de acceso.                       frecuencia_l
 ```
 En el modelo solo se usaron los campos de usuario "user_id", "edad",	"genero" e "intereses", ya que se consideró que "nivel de ingresos", "nivel_educativo", "tipo_suscripcion", "categoría_clientes", "ubicacion", "dispositivo" y "frecuencia login" eran variables que no nos aportaban mucha información sobre las preferencias de los clientes. Y a la variable edad se le hizo una transformación a una variable categórica agrupándo la edad en bines de 12, es decir se agruparon las edades de [18 a 29], [30,41], [42,53], [54,65], [66,77] y [78,89]. Se usó un agrupado uniforme ya que la variable de edad estaba unifórmemente distribuida.
 
-
 El dataset de productos (products.csv) contiene los siguientes campos:
 ```
 product_id: Identificador único del producto o servicio.   	        name: Nombre del producto o servicio.                         category: Categoría del producto.	
@@ -23,7 +23,6 @@ descripcion: Descripción del producto o servicio.          	        palabras_cl
 rating_promedio: Puntuación promedio del producto.                  descuento_aplicado: Descuento aplicado en porcentaje.         stock_actual: Número de unidades disponibles en stock.
 ```
 En el modelo solo se usaron los campos de productos "product_id", "name", "category", "descripcion" y "palabras_clave", ya que se consideró que "precio", "descuento_aplicado" y "stock_actual" eran variables que no describían intrinsicamente las características del producto o servicio. A la variable "palabras_clave" se le realizó una pequeña transformación donde se organizaron las distintas palabras clave de forma alfabética, es decir si tenemos las palabras clave "Rendimiento, Deporte, Fitness" se transforma a "Deporte, Fitness, Rendimiento". Después de esa transformación se evidenció que había una gran cantidad de productos y servicios duplicados, hay en realidad solo 15 servicios/productos diferentes. Por lo que se creó un campo llamado "index" para identificar estos servicios/productos de forma única.
-
 
 El dataset de interacciones (interactions.csv) contiene los siguientes campos:
 ```
@@ -45,7 +44,6 @@ Para hacer las recomendaciones se implementaron tres sistemas de recomendación:
 **Sistema de recomendación de filtro colaborativo:** Este sistema de recomendación calcula la similitud entre diferentes usuarios con base en los productos en comun y sus calificaciones, después de calcular esta correlación entre todos, se toman los usuarios con mayor correlación al usuario que se desea hacerle la recomendación, y luego se calcula una calificación para cada producto basado en la correlación que tienen los usuarios que compraron ese producto con el usuario objetivo y todo esto pesado con la calificación de los usuarios. Ya habiendo calculado estas calificaciones, los productos con mayor calificación son los que se recomiendan.
 
 Finalmente como el modelo devuelve solo 3 productos recomendados, entonces cada sistema de recomendación devuelve 3 productos para recomendar, y lo que se trata de hacer es recomendar los productos que más se repiten en los diferentes sistemas de recomendación. Si hay un producto que se repite en los 3 sistemas seguro es recomendado. Sin embargo si no existiera ningun producto que se repite se toma el producto de primer lugar de cada recomendador.
-
 
 
 ---
@@ -73,6 +71,7 @@ Project_Recommendation_system/
 │──── users_tr.csv                         # Datos de usuarios transformado creado por el notebook EDA_y_transformacion_de_datos.ipynb de la carpeta ML/
 ```
 
+
 ---
 ## Este proyecto fue desarrollado utilizando las siguientes tecnologías y librerías
 
@@ -83,6 +82,7 @@ Project_Recommendation_system/
 - Docker: APlicación para crear contenedores y así tener entornos totalmente controlados para poder desplegar servicios
 - Jupyter y Jupyter notebook: Mediante los notebook de Python se da mejor visibilidad a ciertos cálculos o partes del código
 - UV: Gestor de dependencias
+
 
 ---
 ## Instrucciones para poder usar la API
@@ -114,11 +114,20 @@ curl -X GET "http://localhost:5000/recommendations?user_id=123"
 o en nuestro navegador meternos al url ```http://localhost:5000/recommendations?user_id=123```
 donde 123 lo reemplazaríamos con el user_id del usuario con el que deseamos hacer la recomendación de contenido.
 
+
 ---
 ## Ejemplos de ejecuciones de la API
 ![pruebas](./pruebas_API.png)
 
+
 ---
 ## Análisis sobre el rendimiento del modelo y posibles mejoras
+###Tiempo de inferencia:
+El tiempo de inferencia del modelo es de unos pocos segundos. 
+###Áreas de mejora del modelo:
+El sistema de recomendación se podría complementar usando modelos basados en redes neuronales, sin embargo hay que tener en cuenta que esto podría impactar en el tiempo de inferencia si se usan redes neuronales muy grandes.
+El sistema de recomendación basado en contenido se podría mejorar usando embeddings u otro método de modelado semántico para aprovechar la descripción del producto/servicio y así usar esta información para calcular las similitudes entre los diferentes productos.
+###Métricas de rendimiento del modelo:
+Para hacer este análisis se podrían proponer métricas para medir el desempeño de este modelo en producción mediante un A/B testing.
 
 
