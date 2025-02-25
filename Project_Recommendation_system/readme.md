@@ -8,28 +8,28 @@ El dataset se compone de 3 archivos de texto plano en formato CSV con la informa
 
 El dataset de usuarios (users.csv) contiene los siguientes campos:
 ```
-**user_id:** Identificador único del usuario.                           **edad:** Edad del usuario                                        **genero:** Género del usuario.	
-**nivel_ingresos:** Nivel de ingresos.                                  **nivel_educativo:** Nivel educativo.                             **intereses:** Lista de intereses separados por comas.
-**tipo_suscripcion:** Tipo de suscripción.                              **categoria_cliente:** Categoría del cliente.                     **ubicacion:** Ubicación del usuario.
-**dispositivo:** Dispositivo principal de acceso.                       **frecuencia_login:** Frecuencia con la que el usuario inicia sesión.
+user_id: Identificador único del usuario.                           edad: Edad del usuario                                        genero: Género del usuario.	
+nivel_ingresos: Nivel de ingresos.                                  nivel_educativo: Nivel educativo.                             intereses: Lista de intereses separados por comas.
+tipo_suscripcion: Tipo de suscripción.                              categoria_cliente: Categoría del cliente.                     ubicacion: Ubicación del usuario.
+dispositivo: Dispositivo principal de acceso.                       frecuencia_login: Frecuencia con la que el usuario inicia sesión.
 ```
 En el modelo solo se usaron los campos de usuario "user_id", "edad",	"genero" e "intereses", ya que se consideró que "nivel de ingresos", "nivel_educativo", "tipo_suscripcion", "categoría_clientes", "ubicacion", "dispositivo" y "frecuencia login" eran variables que no nos aportaban mucha información sobre las preferencias de los clientes. Y a la variable edad se le hizo una transformación a una variable categórica agrupándo la edad en bines de 12, es decir se agruparon las edades de [18 a 29], [30,41], [42,53], [54,65], [66,77] y [78,89]. Se usó un agrupado uniforme ya que la variable de edad estaba unifórmemente distribuida.
 
 
 El dataset de productos (products.csv) contiene los siguientes campos:
 ```
-**product_id:** Identificador único del producto o servicio.   	        **name:** Nombre del producto o servicio.                         **category:** Categoría del producto.	
-**descripcion:** Descripción del producto o servicio.          	        **palabras_clave:** Palabras clave relacionadas con el producto. 	**precio:** Precio del producto o servicio en dólares.	
-**rating_promedio:** Puntuación promedio del producto.                  **descuento_aplicado:** Descuento aplicado en porcentaje.         **stock_actual:** Número de unidades disponibles en stock.
+product_id: Identificador único del producto o servicio.   	        name: Nombre del producto o servicio.                         category: Categoría del producto.	
+descripcion: Descripción del producto o servicio.          	        palabras_clave: Palabras clave relacionadas con el producto. 	precio: Precio del producto o servicio en dólares.	
+rating_promedio: Puntuación promedio del producto.                  descuento_aplicado: Descuento aplicado en porcentaje.         stock_actual: Número de unidades disponibles en stock.
 ```
 En el modelo solo se usaron los campos de productos "product_id", "name", "category", "descripcion" y "palabras_clave", ya que se consideró que "precio", "descuento_aplicado" y "stock_actual" eran variables que no describían intrinsicamente las características del producto o servicio. A la variable "palabras_clave" se le realizó una pequeña transformación donde se organizaron las distintas palabras clave de forma alfabética, es decir si tenemos las palabras clave "Rendimiento, Deporte, Fitness" se transforma a "Deporte, Fitness, Rendimiento". Después de esa transformación se evidenció que había una gran cantidad de productos y servicios duplicados, hay en realidad solo 15 servicios/productos diferentes. Por lo que se creó un campo llamado "index" para identificar estos servicios/productos de forma única.
 
 
 El dataset de interacciones (interactions.csv) contiene los siguientes campos:
 ```
-**user_id:** Identificador del usuario que interactuó con un producto.  **metodo_pago:** Método de pago utilizado.                        **tipo_interaccion:** Tipo de interacción.	
-**rating:** Puntuación otorgada al producto.                   	        **comentario:** Opinión del usuario sobre el producto.            **timestamp:** Fecha y hora de la interacción.	
-**product_id:** Identificador del producto con el que el usuario interactuó. 
+user_id: Identificador del usuario que interactuó con un producto.  metodo_pago: Método de pago utilizado.                        tipo_interaccion: Tipo de interacción.	
+rating: Puntuación otorgada al producto.                   	        comentario: Opinión del usuario sobre el producto.            timestamp: Fecha y hora de la interacción.	
+product_id: Identificador del producto con el que el usuario interactuó. 
 ```
 En el modelo solo se usaron los campos de interacciones "user_id",	"product_id",	"tipo_interaccion", "rating" y "comentario", ya que se consideró que "método_pago" no era una variable relevante para el modelo de recomendación y "timestamp" tampoco fue relevante ya que todas las interacciones se encuentran en un periodo corto de tiempo entre 2023-01-01 y	2023-02-04. Se mapearon 4 tipos de interacciones mediante el campo "tipo_interaccion" los cuales fueron comentario, compra, consulta y valoración. Los campos con tipo de interacción igual a "consulta" se eliminaron ya que no hay forma de evaluar la experiencia del usuario con dicho producto, y con el tipo de interacción igual a "compra" en este caso se decidió eliminar estos registros. Aunque en otros casos podríamos decir que si un usuario compra un servicio es porque le interesa bastante entonces significaría una calificación máxima, esto se debería discutir con el negocio de como manejar estos casos. En el tipo de interacción igual a "valoración, el campo "rating" no era nulo, y tenía valores enteros entre 1 y 5, de aqui extraíamos la apreciación de los usuarios con respecto a los usuarios. Y con el tipo de interacción igual a "comentario" el campo comentario exhibía los valores Excelente, Podría mejorar, Aceptable, Malo, Recomendado, para poder unificar estos valores con los del tipo de interacción igual a "valoración" se decidió hacer un reemplazo donde  Excelente, Recomendado, Podría mejorar, Aceptable, Malo y   los reemplazabamos por 5, 5, 3, 3 y 1 respectivamente. Finalmente ya unificados estos campos hicimos un reescalamiento de estos valores para llevarlos de un rango entre 1 a 5 a un rango de 0 a 1, usando un max-min scaler. Finalmente se hizo un join con la tabla transformada de productos para obtener el campo "index" el cual es el identificador único de producto.
 
