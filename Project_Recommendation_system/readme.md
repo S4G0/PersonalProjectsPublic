@@ -122,12 +122,9 @@ donde 123 lo reemplazaríamos con el user_id del usuario con el que deseamos hac
 
 ---
 ## Análisis sobre el rendimiento del modelo y posibles mejoras
-### Tiempo de inferencia:
-El tiempo de inferencia del modelo es de unos pocos segundos. 
-### Áreas de mejora del modelo:
-El sistema de recomendación se podría complementar usando modelos basados en redes neuronales, sin embargo hay que tener en cuenta que esto podría impactar en el tiempo de inferencia si se usan redes neuronales muy grandes.
-El sistema de recomendación basado en contenido se podría mejorar usando embeddings u otro método de modelado semántico para aprovechar la descripción del producto/servicio y así usar esta información para calcular las similitudes entre los diferentes productos.
-### Métricas de rendimiento del modelo:
-Para hacer este análisis se podrían proponer métricas para medir el desempeño de este modelo en producción mediante un A/B testing.
+- Tiempo de inferencia: El tiempo de inferencia del modelo es de unos pocos segundos.
+- Inclusión de nuevo feedback: Al no haber necesidad de entrenar el modelo, es posible tomar nuevo feedback de usuario para actualizar las siguientes recomendaciones muy rápido.
+- Áreas de mejora del modelo: El sistema de recomendación se podría complementar usando modelos basados en redes neuronales, sin embargo hay que tener en cuenta que esto podría impactar en el tiempo de inferencia si se usan redes neuronales muy grandes. El sistema de recomendación basado en contenido se podría mejorar usando embeddings u otro método de modelado semántico para aprovechar la descripción del producto/servicio y así usar esta información para calcular las similitudes entre los diferentes productos.
+- Métricas de rendimiento del modelo: Para hacer este análisis se podrían proponer métricas para medir el desempeño de este modelo en producción y realizar un A/B testing. 
 
 
