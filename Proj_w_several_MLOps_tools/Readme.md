@@ -1,19 +1,9 @@
-<<<<<<< HEAD
-
 =======
-### Proyecto 2: MLOps
+# MLOps
 
-Este proyecto tiene como objetivo implementar una solución completa de MLOps para predecir el tipo de cubierta forestal utilizando datos geoespaciales. Se integran herramientas como Airflow, MLflow, FastAPI, MinIO, MySQL.
+Este proyecto tiene como objetivo implementar una solución completa de MLOps para predecir el tipo de cubierta forestal utilizando datos geoespaciales. Se integran herramientas como Airflow, MLflow, FastAPI, MinIO, MySQL y Jupyter notebooks, todos desplegados en contenedores de docker separados como  microservicios. Como se muestra en el siguiente diagrama:
 
-El pipeline realiza:
-
-* Ingesta de datos.
-
-* Entrenamiento de modelos.
-
-* Registro y seguimiento en MLflow.
-
-* Pruebas de inferencia vía API.
+![diagrama_servicios](images_readme/diagram.png)
 
 Dataset: CoverType de UCI (versión simplificada).
 
